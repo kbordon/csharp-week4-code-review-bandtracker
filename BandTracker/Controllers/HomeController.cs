@@ -17,8 +17,12 @@ namespace BandTracker.Controllers
         [HttpGet("/bands")]
         public ActionResult Bands()
         {
+            Dictionary<string, object> model = new Dictionary<string, object> {};
+            Band random = Band.GetRandomBand();
             List<Band> allBands = Band.GetAll();
-            return View(allBands);
+            model.Add("random", random);
+            model.Add("all-bands", allBands);
+            return View(model);
         }
         // View all bands.
 
@@ -35,6 +39,7 @@ namespace BandTracker.Controllers
         {
             return View();
         }
+        // Go to form to add Band.
 
         [HttpPost("/bands/new")]
         public ActionResult BandCreate()
@@ -42,6 +47,45 @@ namespace BandTracker.Controllers
             Band newBand = new Band(Request.Form["band-name"]);
             newBand.Save();
             return RedirectToAction("Bands");
+        }
+        // After adding band, returns to Bands page.
+
+        [HttpGet("/venues/new")]
+        public ActionResult VenueForm()
+        {
+            return View();
+        }
+        // Go to form to add Venue.
+
+        [HttpPost("/venues/new")]
+        public ActionResult VenueCreate()
+        {
+            Venue newVenue = new Venue(Request.Form["venue-name"]);
+            newVenue.Save();
+            return RedirectToAction("Venues");
+        }
+        // Create a Venue.
+
+        [HttpGet("/bands/{id}")]
+        public ActionResult BandDetail(int id)
+        {
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Band selectedBand = Band.Find(id);
+            List<Venue> BandVenues = selectedBand.GetAllVenues();
+            List<Venue> AllVenues = Venue.GetAll();
+            model.Add("band", selectedBand);
+            model.Add("bandVenues", BandVenues);
+            model.Add("allVenues", AllVenues);
+            return View( model);
+        }
+
+        [HttpPost("bands/{bandId}/venues/new")]
+        public ActionResult BandAddVenue(int bandId)
+        {
+            Band band = Band.Find(bandId);
+            Venue venue = Venue.Find(Int32.Parse(Request.Form["venue-id"]));
+            band.AddVenue(venue);
+            return View("Success");
         }
 
         // [HttpGet("/stylists")]

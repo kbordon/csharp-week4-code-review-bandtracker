@@ -1,0 +1,31 @@
+@{
+    Layout = "_Layout";
+}
+
+@using BandTracker.Models;
+@* @var bandId = @Model["band"].GetId(); doesn't work*@
+
+<h1>BAND: @Model["band"].GetName()</h1>
+<hr />
+@if (@Model["bandVenues"].Count != 0)
+{
+  <h4>Gigs at these venues:</h4>
+  <ul>
+    @foreach (Venue venue in @Model["bandVenues"])
+    {
+      <li>@venue.GetName()</li>
+    }
+  </ul>
+}
+<h4>Add a venue:</h4>
+<form action='/bands/@Model["band"].GetId()/venues/new' method='post'>
+  <select class="form-control" id='venue-id' name='venue-id' type='text'>
+    @foreach (var venue in @Model["allVenues"])
+    {
+      <option value='@venue.GetId()'>@venue.GetName()</option>
+    }
+  </select>
+  <button type='submit'>ADD</button>
+</form>
+<p><a href="/bands">VIEW ALL BANDS</a></p>
+<p><a href="/">HOME</a></p>
