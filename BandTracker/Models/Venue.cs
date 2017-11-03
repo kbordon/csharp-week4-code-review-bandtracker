@@ -25,11 +25,11 @@ namespace BandTracker.Models
         {
             _name = name;
         }
-        public string GetId()
+        public int GetId()
         {
             return _id;
         }
-        public void SetId(string id)
+        public void SetId(int id)
         {
             _id = id;
         }
@@ -89,6 +89,52 @@ namespace BandTracker.Models
                 conn.Dispose();
             }
             return allVenues;
+        }
+
+        public void Save()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO venues (name) VALUES (@VenueName);";
+            cmd.Parameters.Add(new MySqlParameter("@VenueName", this.GetName()));
+            cmd.ExecuteNonQuery();
+            this.SetId((int) cmd.LastInsertedId);
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public static Venue Find(int inputId)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = "SELECT * FROM venues WHERE id = @SearchId;";
+            cmd.Parameters.Add(new MySqlParameter("@SearchId", inputId));
+
+            int venueId = 0;
+            string venueName = "";
+
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while (rdr.Read())
+            {
+                venueId = rdr.GetInt32(0);
+                venueName = rdr.GetString(1);
+            }
+
+            Venue foundVenue = new Venue(venueName, venueId);
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return foundVenue;
         }
     }
 }
