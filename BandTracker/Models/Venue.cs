@@ -136,5 +136,49 @@ namespace BandTracker.Models
             }
             return foundVenue;
         }
+
+        public void UpdateVenue(string updateName)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE venues SET name = @NewName WHERE id = @SearchId;";
+
+            cmd.Parameters.Add(new MySqlParameter("@SearchId", this.GetId()));
+            //name
+            cmd.Parameters.Add(new MySqlParameter("@NewName", updateName));
+            //city TODO
+            // cmd.Parameters.Add(new MySqlParameter("@NewCity", updateCity));
+            //capacity TODO
+            // cmd.Parameters.Add(new MySqlParameter("@NewCapacity", updateCapacity));
+
+            cmd.ExecuteNonQuery();
+            this.SetName(updateName);
+            // this.SetCity(updateCity); TODO
+            // this.SetCapacity(updateCapacity); TODO
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = "DELETE FROM venues WHERE id = @SearchId;";
+            cmd.Parameters.Add(new MySqlParameter("@SearchId", this.GetId()));
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
     }
 }

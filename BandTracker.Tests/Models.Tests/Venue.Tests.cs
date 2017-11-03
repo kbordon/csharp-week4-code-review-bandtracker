@@ -37,6 +37,7 @@ namespace BandTracker.Models.Tests
 
             CollectionAssert.AreEqual(testList, result);
         }
+        // Create a Venue.
 
         [TestMethod]
         public void Find_FindsVenueInDatabase_Stylist()
@@ -48,5 +49,36 @@ namespace BandTracker.Models.Tests
 
             Assert.AreEqual(testVenue, foundVenue);
         }
+        // Reads a Venue's data.
+
+        [TestMethod]
+        public void UpdateVenue_UpdatesVenueInDatabase_String()
+        {
+            Venue testVenue = new Venue("Gaslamp");
+            testVenue.Save();
+            testVenue.UpdateVenue("Electric Lamp");
+
+            Assert.AreEqual(testVenue.GetName(), "Electric Lamp");
+        }
+        // Update a specific venue's information.
+
+        [TestMethod]
+        public void Delete_DeletesVenueInDatabase_VenueList()
+        {
+            Venue testVenue = new Venue("Spreckles Theatre");
+            testVenue.Save();
+            Venue testVenue2 = new Venue("Gaslamp");
+            testVenue2.Save();
+            Venue testVenue3 = new Venue("House of Blues");
+            testVenue3.Save();
+
+            List<Venue> testList = new List<Venue>{testVenue2, testVenue3};
+            testVenue.Delete();
+
+            List<Venue> result = Venue.GetAll();
+
+            CollectionAssert.AreEqual(testList, result);
+        }
+        // Deletes a specific venue.
     }
 }
