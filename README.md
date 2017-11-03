@@ -34,6 +34,7 @@
 | Will allow user to delete a client that no longer visits the salon. | User clicks on client's name on stylist's page. User clicks on "Delete" button on client's information page. | User is taken back to stylist page with list of clients without just removed client. |
 
 ### Known Bugs
+* If entering a name that has a special character such as "$", word will be not be capitalized correctly (Example: "a$ap ferg" becomes "A$AP Ferg")
 
 ### Contact Me
 

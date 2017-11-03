@@ -93,11 +93,27 @@ namespace BandTracker.Models
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
+            // Ensures input is capitalized
+            string name = this.GetName();
+            string[] splitName = name.Split();
+            List<String> newName = new List<String>{};
+            foreach (string word in splitName)
+            {
+                char[] splitWord = word.ToCharArray();
+                if (Char.IsLetter(splitWord[0]) && Char.IsLower(splitWord[0]))
+                {
+                    splitWord[0] = Char.ToUpper(splitWord[0]);
+                }
+                string combinedWord = new string(splitWord);
+                newName.Add(combinedWord);
+            }
+            string capitalizedName = String.Join(" ", newName.ToArray());
 
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"INSERT INTO venues (name) VALUES (@VenueName);";
-            cmd.Parameters.Add(new MySqlParameter("@VenueName", this.GetName()));
+            cmd.Parameters.Add(new MySqlParameter("@VenueName", capitalizedName));
             cmd.ExecuteNonQuery();
+            this.SetName(capitalizedName);
             this.SetId((int) cmd.LastInsertedId);
             conn.Close();
             if (conn != null)

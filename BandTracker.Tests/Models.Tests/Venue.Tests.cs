@@ -118,5 +118,15 @@ namespace BandTracker.Models.Tests
             CollectionAssert.AreEqual(expectedBands, newVenue.GetAllBands());
         }
         // Tests that all bands of a venue are being retrieved.
+
+        [TestMethod]
+        public void Save_SavesNamesAsCapitalized_String()
+        {
+            Venue newVenue = new Venue("aztec stadium");
+            newVenue.Save();
+
+            Venue savedVenue = Venue.Find(newVenue.GetId());
+            Assert.AreNotEqual("aztec stadium", savedVenue.GetName());
+        }
     }
 }

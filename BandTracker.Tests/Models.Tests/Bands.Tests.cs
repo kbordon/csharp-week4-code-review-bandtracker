@@ -158,5 +158,17 @@ namespace BandTracker.Models.Tests
 
         }
         // Tests method that recommends a random band different to a specific one.
+
+        [TestMethod]
+        public void Save_SavesNamesAsCapitalized_String()
+        {
+            Band newBand = new Band("a$ap ferg");
+            newBand.Save();
+
+            Band savedBand = Band.Find(newBand.GetId());
+            Assert.AreNotEqual("a$ap ferg", savedBand.GetName());
+        }
+
+
     }
 }
