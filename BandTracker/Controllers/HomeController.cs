@@ -140,7 +140,6 @@ namespace BandTracker.Controllers
         public ActionResult VenueEdit(int id)
         {
             Venue selectedVenue = Venue.Find(id);
-            model.Add("venue", selectedVenue);
             return View(selectedVenue);
         }
         // Go to Form to edit specific Venue details.
