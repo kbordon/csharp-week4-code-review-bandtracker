@@ -182,7 +182,7 @@ namespace BandTracker.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = "DELETE FROM venues WHERE id = @SearchId;";
+            cmd.CommandText = "DELETE FROM venues WHERE id = @SearchId; DELETE FROM gigs WHERE venue_id = @SearchId;";
             cmd.Parameters.Add(new MySqlParameter("@SearchId", this.GetId()));
             cmd.ExecuteNonQuery();
             conn.Close();

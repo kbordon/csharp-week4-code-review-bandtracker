@@ -9,7 +9,7 @@
 <hr />
 @if (@Model["bandVenues"].Count != 0)
 {
-  <h4>Gigs at these venues:</h4>
+  <h4>Played at these venues:</h4>
   <ul>
     @foreach (Venue venue in @Model["bandVenues"])
     {
@@ -17,7 +17,7 @@
     }
   </ul>
 }
-<h4>Add a venue:</h4>
+<h4>ADD A VENUE:</h4>
 <form action='/bands/@Model["band"].GetId()/venues/new' method='post'>
   <select class="form-control" id='venue-id' name='venue-id' type='text'>
     @foreach (var venue in @Model["allVenues"])

@@ -3,7 +3,7 @@
 }
 
 @using BandTracker.Models;
-@var venueId = Model["venue"].GetId()
+@* @var venueId = Model["venue"].GetId() doesn't work*@
 <h1>VENUE: @Model["venue"].GetName()</h2>
 <hr />
 @if (@Model["venueBands"].Count != 0)
@@ -17,7 +17,7 @@
   </ul>
 }
 <h4>ADD A BAND TO THIS VENUE:</h4>
-<form action=($'/categories/{venueId}/bands/new') method='post'>
+<form action='/venues/@Model["venue"].GetId()/bands/new' method='post'>
   <label for='band-id'>Select a band</label>
   <select id='band-id' name='band-id' type='text'>
     @foreach (var band in @Model["allBands"])
@@ -26,6 +26,10 @@
     }
   </select>
   <button type='submit'>ADD</button>
+</form>
+
+<form action'/venues/@Model["venue"].GetId()/delete' class="pull-right" method='post'>
+    <button type="submit">REMOVE THIS VENUE</button>
 </form>
 <p><a href="/venues">VIEW ALL VENUES</a></p>
 <p><a href="/">HOME</a></p>

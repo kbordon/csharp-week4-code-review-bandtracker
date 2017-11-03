@@ -3,12 +3,12 @@
 }
 <h1>BANDS</h1>
 <hr />
-@if (Model["all-bands"].Count != 0)
+@if (Model["allBands"].Count != 0)
 {
     <h4><a href='/bands/@Model["random"].GetId()'>Discover a new band</a></h4>
     <p class ="lead">Or select a band from the list below:</p>
   <ul class="list-unstyled">
-    @foreach (var band in Model["all-bands"])
+    @foreach (var band in Model["allBands"])
     {
       <li><a href='/bands/@band.GetId()'>@band.GetName()</a></li>
     }
