@@ -133,7 +133,7 @@ namespace BandTracker.Models
             return foundVenue;
         }
 
-        public void UpdateVenue(string updateName)
+        public void UpdateVenue()
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
@@ -142,14 +142,14 @@ namespace BandTracker.Models
 
             cmd.Parameters.Add(new MySqlParameter("@SearchId", this.GetId()));
             //name
-            cmd.Parameters.Add(new MySqlParameter("@NewName", updateName));
+            cmd.Parameters.Add(new MySqlParameter("@NewName", this.GetName()));
             //city TODO
             // cmd.Parameters.Add(new MySqlParameter("@NewCity", updateCity));
             //capacity TODO
             // cmd.Parameters.Add(new MySqlParameter("@NewCapacity", updateCapacity));
 
             cmd.ExecuteNonQuery();
-            this.SetName(updateName);
+            // this.SetName(updateName);
             // this.SetCity(updateCity); TODO
             // this.SetCapacity(updateCapacity); TODO
 

@@ -57,7 +57,9 @@ namespace BandTracker.Models.Tests
         {
             Band testBand = new Band("Billy Christmas");
             testBand.Save();
-            testBand.UpdateBand("Billy Holiday");
+
+            testBand.SetName("Billy Holiday");
+            testBand.UpdateBand();
 
             Assert.AreEqual(testBand.GetName(), "Billy Holiday");
         }
@@ -80,6 +82,42 @@ namespace BandTracker.Models.Tests
 
             CollectionAssert.AreEqual(testList, result);
         }
-        // Deletes a specific venue.
+        // Deletes a specific band.
+
+        [TestMethod]
+        public void AddVenue_AddVenueToBand_Venue()
+        {
+
+            Band newBand = new Band("SZA");
+            newBand.Save();
+
+            Venue venue1 = new Venue("Roseland Theater");
+            venue1.Save();
+            newBand.AddVenue(venue1);
+
+            Assert.AreEqual(venue1, newBand.GetAllVenues()[0]);
+
+        }
+        // Adds a venue to a band.
+
+        [TestMethod]
+        public void GetAllVenues_GetsAllVenuesByBand_List()
+        {
+            Band newBand = new Band("CashmereCat");
+            newBand.Save();
+
+            Venue venue1 = new Venue("Roseland Theater");
+            venue1.Save();
+
+            Venue venue2 = new Venue("Aztec Stadium");
+            venue2.Save();
+            newBand.AddVenue(venue1);
+            newBand.AddVenue(venue2);
+
+            List<Venue> expectedVenues = new List<Venue>{venue1, venue2};
+
+            CollectionAssert.AreEqual(expectedVenues, newBand.GetAllVenues());
+        }
+        // Tests that all bands of a venue are being retrieved.
     }
 }

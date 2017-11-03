@@ -57,7 +57,9 @@ namespace BandTracker.Models.Tests
         {
             Venue testVenue = new Venue("Gaslamp");
             testVenue.Save();
-            testVenue.UpdateVenue("Electric Lamp");
+
+            testVenue.SetName("Electric Lamp");
+            testVenue.UpdateVenue();
 
             Assert.AreEqual(testVenue.GetName(), "Electric Lamp");
         }
@@ -83,7 +85,23 @@ namespace BandTracker.Models.Tests
         // Deletes a specific venue.
 
         [TestMethod]
-        public void AddABand_AddsBandToVenue_2()
+        public void AddBand_AddsBandToVenue_2()
+        {
+            Venue newVenue = new Venue("Aztec Stadium");
+            newVenue.Save();
+
+            Band band1 = new Band("Lady Gaga");
+            band1.Save();
+
+            newVenue.AddBand(band1);
+
+            Assert.AreEqual(band1, newVenue.GetAllBands()[0]);
+
+        }
+        // Adds a band to a venue.
+
+        [TestMethod]
+        public void GetAllBands_GetsAllBandsByVenue_List()
         {
             Venue newVenue = new Venue("Aztec Stadium");
             newVenue.Save();
@@ -95,8 +113,10 @@ namespace BandTracker.Models.Tests
             newVenue.AddBand(band1);
             newVenue.AddBand(band2);
 
-            Assert.AreEqual(2, newVenue.GetAllBands().Count);
+            List<Band> expectedBands = new List<Band>{band1, band2};
 
+            CollectionAssert.AreEqual(expectedBands, newVenue.GetAllBands());
         }
+        // Tests that all bands of a venue are being retrieved.
     }
 }
