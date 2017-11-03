@@ -119,5 +119,44 @@ namespace BandTracker.Models.Tests
             CollectionAssert.AreEqual(expectedVenues, newBand.GetAllVenues());
         }
         // Tests that all bands of a venue are being retrieved.
+
+        [TestMethod]
+        public void GetRandomBand_GetsBandFromBandsRandomly_True()
+        {
+            Band testBand = new Band("Lorde");
+            testBand.Save();
+            Console.WriteLine(testBand.GetName());
+            Console.WriteLine(testBand.GetId());
+            Band testBand2 = new Band("Billy Holiday");
+            testBand2.Save();
+            Console.WriteLine(testBand2.GetName());
+            Console.WriteLine(testBand2.GetId());
+            Band testBand3 = new Band("A$AP Ferg");
+            testBand3.Save();
+            Console.WriteLine(testBand3.GetName());
+            Console.WriteLine(testBand3.GetId());
+
+            List<Band> testList = new List<Band>{testBand, testBand2,testBand3};
+            Band randomBand = Band.GetRandomBand();
+            Assert.AreEqual(true, testList.Contains(randomBand));
+        }
+        // Tests method that recommends a band.
+
+        [TestMethod]
+        public void SuggestDifferentBand_GetsDifferentBandFromDatabase_False()
+        {
+            Band testBand = new Band("Lorde");
+            testBand.Save();
+            Band testBand2 = new Band("Billy Holiday");
+            testBand2.Save();
+            Band testBand3 = new Band("A$AP Ferg");
+            testBand3.Save();
+
+            Band randomBand = testBand.SuggestDifferentBand();
+            List<Band> testList = new List<Band>{testBand2,testBand3};
+            Assert.AreEqual(true, randomBand != testBand && testList.Contains(randomBand));
+
+        }
+        // Tests method that recommends a random band different to a specific one.
     }
 }

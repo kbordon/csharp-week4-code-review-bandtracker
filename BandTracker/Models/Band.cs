@@ -111,30 +111,30 @@ namespace BandTracker.Models
 
         public static Band Find(int inputId)
         {
-                MySqlConnection conn = DB.Connection();
-                conn.Open();
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
 
-                var cmd = conn.CreateCommand() as MySqlCommand;
-                cmd.CommandText = "SELECT * FROM bands WHERE id = @SearchId;";
-                cmd.Parameters.Add(new MySqlParameter("@SearchId", inputId));
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = "SELECT * FROM bands WHERE id = @SearchId;";
+            cmd.Parameters.Add(new MySqlParameter("@SearchId", inputId));
 
-                int bandId = 0;
-                string bandName = "";
+            int bandId = 0;
+            string bandName = "";
 
-                var rdr = cmd.ExecuteReader() as MySqlDataReader;
-                while (rdr.Read())
-                {
-                    bandId = rdr.GetInt32(0);
-                    bandName = rdr.GetString(1);
-                }
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while (rdr.Read())
+            {
+                bandId = rdr.GetInt32(0);
+                bandName = rdr.GetString(1);
+            }
 
-                Band foundBand = new Band(bandName, bandId);
-                conn.Close();
-                if (conn != null)
-                {
-                    conn.Dispose();
-                }
-                return foundBand;
+            Band foundBand = new Band(bandName, bandId);
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return foundBand;
         }
 
         public void UpdateBand()
@@ -209,7 +209,7 @@ namespace BandTracker.Models
             while (rdr.Read())
             {
                 int id = rdr.GetInt32(0);
-                string name = rdr.GetName(1);
+                string name = rdr.GetString(1);
                 Venue bandVenue = new Venue(name, id);
                 bandVenues.Add(bandVenue);
             }
@@ -219,6 +219,55 @@ namespace BandTracker.Models
                 conn.Dispose();
             }
             return bandVenues;
+        }
+
+        public static Band GetRandomBand()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = "SELECT * FROM bands ORDER BY RAND() LIMIT 1;";
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            int id = 0;
+            string name = "";
+            while (rdr.Read())
+            {
+                id = rdr.GetInt32(0);
+                name = rdr.GetString(1);
+            }
+            Band randomBand = new Band(name, id);
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return randomBand;
+        }
+
+        public Band SuggestDifferentBand()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = "SELECT * FROM bands WHERE id != @BandId ORDER BY RAND() LIMIT 1;";
+            cmd.Parameters.Add(new MySqlParameter("@BandId", GetId()));
+            var rdr = cmd.ExecuteReader() as MySqlDataReader;
+            int id = 0;
+            string name = "";
+            while (rdr.Read())
+            {
+                id = rdr.GetInt32(0);
+                name = rdr.GetString(1);
+            }
+            Band randomBand = new Band(name, id);
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return randomBand;
         }
     }
 }

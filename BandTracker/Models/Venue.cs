@@ -204,7 +204,7 @@ namespace BandTracker.Models
             while (rdr.Read())
             {
                 int id = rdr.GetInt32(0);
-                string name = rdr.GetName(1);
+                string name = rdr.GetString(1);
                 Band venueBand = new Band(name, id);
                 venueBands.Add(venueBand);
             }
