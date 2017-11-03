@@ -4,6 +4,11 @@
 ### Description
 
 ### Installation Instructions
+> CREATE database band_tracker;
+> USE band_tracker;
+> CREATE TABLE venues (id serial PRIMARY KEY, name VARCHAR (255), capacity INT);
+> CREATE TABLE bands (id serial PRIMARY KEY, name VARCHAR (255), popularity INT);
+> CREATE TABLE gigs (band_id INT, venue_id INT);
 
 ### Technology Needed
 
