@@ -10,6 +10,7 @@ namespace BandTracker.Models.Tests
     {
         public void Dispose()
         {
+            Venue.ClearAll();
             Band.ClearAll();
         }
         public BandTests()

@@ -58,7 +58,7 @@ namespace BandTracker.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM bands;";
+            cmd.CommandText = @"DELETE FROM gigs; DELETE FROM bands;";
             cmd.ExecuteNonQuery();
 
             conn.Close();

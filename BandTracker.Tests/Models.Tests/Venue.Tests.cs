@@ -11,6 +11,7 @@ namespace BandTracker.Models.Tests
         public void Dispose()
         {
             Venue.ClearAll();
+            Band.ClearAll();
         }
         public VenueTests()
         {
@@ -80,5 +81,22 @@ namespace BandTracker.Models.Tests
             CollectionAssert.AreEqual(testList, result);
         }
         // Deletes a specific venue.
+
+        [TestMethod]
+        public void AddABand_AddsBandToVenue_2()
+        {
+            Venue newVenue = new Venue("Aztec Stadium");
+            newVenue.Save();
+
+            Band band1 = new Band("Lady Gaga");
+            band1.Save();
+            Band band2 = new Band("Rihanna");
+            band2.Save();
+            newVenue.AddBand(band1);
+            newVenue.AddBand(band2);
+
+            Assert.AreEqual(2, newVenue.GetAllBands().Count);
+
+        }
     }
 }
