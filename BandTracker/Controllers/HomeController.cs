@@ -14,6 +14,36 @@ namespace BandTracker.Controllers
         }
         // Welcome Page
 
+        [HttpGet("/bands")]
+        public ActionResult Bands()
+        {
+            List<Band> allBands = Band.GetAll();
+            return View(allBands);
+        }
+        // View all bands.
+
+        [HttpGet("/venues")]
+        public ActionResult Venues()
+        {
+            List<Venue> allVenues = Venue.GetAll();
+            return View(allVenues);
+        }
+        // View all venues.
+
+        [HttpGet("/bands/new")]
+        public ActionResult BandForm()
+        {
+            return View();
+        }
+
+        [HttpPost("/bands/new")]
+        public ActionResult BandCreate()
+        {
+            Band newBand = new Band(Request.Form["band-name"]);
+            newBand.Save();
+            return RedirectToAction("Bands");
+        }
+
         // [HttpGet("/stylists")]
         // public ActionResult StylistsView()
         // {
