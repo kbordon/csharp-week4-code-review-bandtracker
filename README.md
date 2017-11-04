@@ -6,9 +6,25 @@
 ## Description
 _This is an application that exercises more advanced database queries using many-to-many relationships with C# and MySql. The application allows the user to enter, retrieve, edit, and delete data about a venue to a database, and they can also add, and retrieve information about a band. Additionally, they can retrieve data based on the many-to-many relationship between the stored venues and bands._
 
-# Specs
+### Specs
 |Behavior|Input|Output|
 |-|-|-|
+|User can see homepage with splash page for links to either add or view a band or add or view a venue.| User goes to homepage URL in browser.| User sees homepage with two sections for band and venues that each have two links to add to or view those sections. |
+| User can go to form page to add venue. | User clicks link in Venue section that says "Add." | User is taken to form to add a Venue. |
+| User can fill out form with venue details to add a venue. | User enters: <br>The Gaslamp<br><br> User clicks submit. | User is taken to venues list that displays all venues, including venue that is newly added. |
+| User can view a list of all venues currently added. | User clicks "View" link. | User is taken to page with list of of all venues. |
+| User can click on a specific venue to see its details. | User clicks venue on list of venues. | User is taken to venue's detail page. |
+| User view list of bands that have played at a specific venue. | User clicks specific venue in venues list. | User is taken to detail page that displays list of bands that have played there. |
+| User can add a band to venue's list of bands. | User selects a band from from the options that include those currently entered, and clicks add. | The detail page is updated with band added to the list. |
+| User can update information of specific venue. | User clicks "EDIT" link on specific venue's page, and enters new information. <br><br>User clicks Submit. | The venue's information is updated, and the user is taken back to that venue's page with new information.|
+| User can delete a venue that is no longer available. | User clicks on venue's specific page and clicks on "Delete" button. | User is taken back to page listing all venues, with the just deleted venue removed. |
+| User can go to form page to add a band. | User clicks link in Band section that says "Add." | User is taken to form to add a Venue. |
+| User can fill out form with band details to add a band. | User enters: <br>Imagine Dragons<br><br> User clicks submit. | User is taken to venues list that displays all venues, including venue that is newly added. |
+| User can view all bands that have been entered. | User clicks "View" in Bands section of page. | User is taken to page that lists all bands. |
+| User can see a page of band chosen at random. | User clicks "Discover a New Band." | User is taken to detail page of a random band. |
+| User can see a specific band's information. | User clicks on band's name in bands list. | User is taken that band's detail page. |
+| User can view list of venues that band has played. | User clicks specific band in band of list. | User is taken to detail page that displays list of venues they've played. |
+| User can add a venue to bands's list of venues played. | User selects a venue from the options that include those currently entered, and clicks add. | The detail page is updated with venue added to the list. |
 
 ## Setup/Installation Requirements
 * Enter the URL: https://github.com/kbordon/csharp-week4-code-review-bandtracker in your browser.
@@ -55,7 +71,8 @@ _This is an application that exercises more advanced database queries using many
   * Once you're finished, close the browser and turn off the server by entering <kbd>Ctrl</kbd> + <kbd>C</kbd> on your powershell or terminal.
 
 ## Known Bugs
-* When listing phone numbers, should a area code be entered starting with a zero, the number may be listed without the zero as it is converted into a number, and will lose the beginning zero.
+* If entering a name that has a special character such as "$", word will be not be capitalized correctly (Example: "a$ap ferg" becomes "A$AP Ferg")
+* Venues on a band's venue list, and vice-versa can be listed multiple times, which seems unnecessary. Would like to go back either make the query return only the first of each relationship, or attach additional information field, like date of the gig.
 
 ## Support and contact details
 
@@ -76,47 +93,3 @@ _If you have any questions, comments, or concerns, please contact Kimberly at [k
 *This software is licensed under the MIT license.*
 
 Copyright © 2017 **_Kimberly Bordon_**
-
-# BandTracker
-##### by Kimberly Bordon
-
-### Description
-
-### Installation Instructions
-> CREATE database band_tracker;
-> USE band_tracker;
-> CREATE TABLE venues (id serial PRIMARY KEY, name VARCHAR (255), city VARCHAR (255), capacity INT);
-> CREATE TABLE bands (id serial PRIMARY KEY, name VARCHAR (255), popularity INT);
-> CREATE TABLE gigs (band_id INT, venue_id INT);
-
-### Technology Needed
-
-### Specs
-|Behavior|Input|Output|
-|-|-|-|
-|User can see homepage with splash page for links to either add or view a band or add or view a venue.| User goes to homepage URL in browser.| User sees homepage with two sections for band and venues that each have two links to add to or view those sections. |
-| User can go to form page to add venue. | User clicks link in Venue section that says "Add." | User is taken to form to add a Venue. |
-| User can fill out form with venue details to add a venue. | User enters: <br><br>The Gaslamp<br> out form and clicks submit. | User is taken to venues list that displays all venues, including venue that is newly added. |
-| User can view a list of all venues currently added. | User clicks "View" link. | User is taken to page with list of of all venues. |
-| User can click on a specific venue to see its details. | User clicks venue on list of venues. | User is taken to venue's detail page. |
-| User can click
-
-|The app will start user at the hair salon homepage to either add or view the current stylists.| The user goes to homepage.| The user is presented with homepage with title, and two links to either add or view current stylists.|
-| Will allow user to see all the hair salon's current stylist. | The user clicks "View Stylists" link on the homepage. | The user is taken to new page that lists all stylists |
-| Will allow user to go to form to enter a new stylist's information. | The user clicks "Add a Stylist" link on homepage. | The user is taken to a new page with a form to enter the new stylist. |
-| Will allow user to fill form and add a stylist to list of stylist. | User enters: <br><br>Dylan Brook<br>503-444-6745<br><br> User clicks Submit | The user is taken to list of stylists, with newly added stylist. |
-| Will allow user to select a stylist from the list, and see their information and clients. | User clicks a stylist name. | The user is taken to stylist's detail page, including list of client if they have any. |
-| Will allow user to select a client from the stylist's list of current clients, and see their information. | User clicks a client's name. | The user is shown client's information. |
-| Will allow user to add new clients to a stylist's client list. | User clicks "Add a Client" on stylist's detail page. | The user is taken to page with a client form. |
-| Will allow user to fill out client information, and add client. | User enters:<br><br>Dahlia Miyazaki<br>503-859-3324<br><br> User clicks Submit | The user is taken to stylist's page of that client with client newly added to client list. |
-| Will allow user to update a client's information details. | User clicks on edit link on the client's information, and enters new information.<br><br>User clicks Submit. | The client's information is updated, and the user is taken back to stylist page with new client information shown.|
-| Will allow user to delete a client that no longer visits the salon. | User clicks on client's name on stylist's page. User clicks on "Delete" button on client's information page. | User is taken back to stylist page with list of clients without just removed client. |
-
-### Known Bugs
-* If entering a name that has a special character such as "$", word will be not be capitalized correctly (Example: "a$ap ferg" becomes "A$AP Ferg")
-
-### Contact Me
-
-#### Legal
-
-_Licensed under MIT license._
