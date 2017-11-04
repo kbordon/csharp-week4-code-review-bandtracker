@@ -6,7 +6,7 @@
   <div class="top-spacer link-custom">
     @if (Model["allBands"].Count != 0)
     {
-        <h4><a href='/bands/@Model["random"].GetId()'>Discover a new band</a></h4>
+        <span class="link-other"><a href='/bands/@Model["random"].GetId()'>Discover a new band</a></span>
         <p class="white-text">Or select a band from the list below:</p>
       <ul class="list-unstyled">
         @foreach (var band in Model["allBands"])
