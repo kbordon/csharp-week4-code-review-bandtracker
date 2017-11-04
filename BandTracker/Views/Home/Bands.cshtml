@@ -1,28 +1,31 @@
 @{
     Layout = "_Layout";
 }
-<h1>BANDS</h1>
-<hr />
-@if (Model["allBands"].Count != 0)
-{
-    <h4><a href='/bands/@Model["random"].GetId()'>Discover a new band</a></h4>
-    <p class ="lead">Or select a band from the list below:</p>
-  <ul class="list-unstyled">
-    @foreach (var band in Model["allBands"])
+<h1 class="top-index">BANDS</h1>
+<div class="container-custom">
+  <div class="top-spacer link-custom">
+    @if (Model["allBands"].Count != 0)
     {
-      <li><a href='/bands/@band.GetId()'>@band.GetName()</a></li>
+        <h4><a href='/bands/@Model["random"].GetId()'>Discover a new band</a></h4>
+        <p class="white-text">Or select a band from the list below:</p>
+      <ul class="list-unstyled">
+        @foreach (var band in Model["allBands"])
+        {
+          <li><a href='/bands/@band.GetId()'>@band.GetName()</a></li>
+        }
+      </ul>
+
     }
-  </ul>
+    else
+    {
+        <div class="alert alert-warning">
+          <h4><em>There are no bands entered yet.</em></h4>
+        </div>
+    }
 
-}
-else
-{
-    <div class="alert alert-warning">
-      <h4><em>There are no bands entered yet.</em></h4>
-    </div>
-}
-
-<ul class="list-inline">
-  <li><a class="other-link" href="/bands/new">ADD A BAND</a></li>
-  <li><a class="other-link" href="/">HOME</a></li>
-</ul>
+    <ul class="list-inline link-other">
+      <li><a href="/bands/new">ADD A BAND</a></li>
+      <li><a href="/">HOME</a></li>
+    </ul>
+  </div>
+</div>

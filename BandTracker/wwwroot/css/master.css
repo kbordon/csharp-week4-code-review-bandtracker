@@ -1,3 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Advent+Pro:600|Karla:400i|Lato:300|Rajdhani|Source+Sans+Pro:300');
 body {
-  font-family: sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: black;
+}
+
+h1 {
+  font-weight: bolder;
+  text-shadow: 2px 2px 10px black;
+  color: white;
+  font-size: 100px;
+  font-family: 'Karla', sans-serif;
+}
+
+.top-index {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.bottom-index {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  margin-bottom: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /*box-sizing: border-box;*/
+}
+
+.full-page {
+  min-height: 100%;
+  background:
+    linear-gradient(
+      rgba(255, 134, 134, 0.2),
+      rgba(255, 134, 134, 0.5)
+      ),
+    url("/img/bandbg.jpg");
+  top:0;
+  right: 0;
+  bottom:0;
+  left:0;
+}
+
+/*.band-bg {
+  padding-top: 100%;
+  height: 0;
+  width: 100%;
+  background-size: 100%;
+}*/
+
+.link-custom a {
+  background-color: black;
+  font-family: 'Rajdhani', sans-serif;
+  color: white;
+  padding-left: 2px;
+  padding-right: 2px;
+  letter-spacing: 3px;
+  font-weight: lighter;
+}
+
+.link-custom a:hover {
+  font-weight: normal;
+  color: yellow;
+}
+.link-index a {
+  font-size: 40px;
+}
+
+.link-other a {
+ font-size: 24px;
+}
+
+.link-band{
+  position: absolute;
+  top: 175px;
+  left: 4px;
+}
+
+.link-venue {
+  position: absolute;
+  bottom: 175px;
+  right: 4px;
+}
+
+.top-spacer-form {
+  padding-top: 150px;
+}
+
+.top-spacer {
+  padding-top: 100px;
+}
+
+.container-custom {
+  padding: 10px;
 }
