@@ -4,30 +4,32 @@
 
 @using BandTracker.Models;
 @* @var venueId = Model["venue"].GetId() doesn't work*@
-<h1 class="top-index">VENUE: @Model["venue"].GetName()</h2>
-<div class="container-custom">
-  <div class="top-spacer link-custom">
+<div>
+  <h1 class="top-top">VENUE: @Model["venue"].GetName()</h1>
+</div>
+<div class="container-custom link-custom">
     <div class="row">
-      <div class="col s7">
-        @if (@Model["venueBands"].Count != 0)
-        {
-          <h4 class="white-text">Hosted:</h4>
-          <ul>
-            @foreach (var band in @Model["venueBands"])
-            {
-              <li>@band.GetName()</li>
-            }
-          </ul>
-        }
+      <div class="col s7 white-text">
+          @if (@Model["venueBands"].Count != 0)
+          {
+            <h4 class="white-text list-venue">HOSTED:</h4>
+            /*<hr style="height: 1px; border: 1px solid red; border-top-width: 1px; background-color: red; margin-top: 0px" />*/
+            <ul>
+              @foreach (var band in @Model["venueBands"])
+              {
+                <li class="list-non-link">@band.GetName()</li>
+              }
+            </ul>
+          }
       </div>
       <div class="col s5">
         <div class="row">
           <div class="col s12">
-            <div class="venue-detail-form">
+            <div class="detail-form">
               <h4 class="white-text">ADD A BAND TO THIS VENUE:</h4>
               <form action='/venues/@Model["venue"].GetId()/bands/new' method='post'>
                 <select class="white-text" id='band-id' name='band-id' type='text'>
-                  <option value="">Select a band...</option>
+                  <option value="" disabled selected>Select a band...</option>
                   @foreach (var band in @Model["allBands"])
                   {
                     <option value='@band.GetId()'>@band.GetName()</option>
@@ -53,5 +55,4 @@
       <li class="venue-link"><a href="/venues">VIEW ALL VENUES</a></li>
       <li><a href="/">HOME</a></li>
     </ul>
-  </div>
 </div>

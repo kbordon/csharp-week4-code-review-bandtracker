@@ -13,6 +13,14 @@ h1 {
   font-family: 'Karla', sans-serif;
 }
 
+h1 {
+  font-weight: bolder;
+  text-shadow: 2px 2px 10px black;
+  color: white;
+  font-size: 100px;
+  font-family: 'Karla', sans-serif;
+}
+
 .top-index {
   position: absolute;
   top: 0px;
@@ -20,6 +28,13 @@ h1 {
   margin-top: 0;
   padding-top: 0;
 }
+
+.top-top {
+  margin-top:0;
+  padding-top:0;
+  margin-bottom: 10px;
+}
+
 
 .bottom-index {
   position: absolute;
@@ -86,7 +101,6 @@ html, body {
 }
 .link-list-venue a {
   background-color: rgba(0,245,245,1);
-  font
 }
 
 .link-band-index{
@@ -101,6 +115,28 @@ html, body {
   right: 4px;
 }
 
+.list-band {
+  background-color: red;
+  color: white;
+  font-size: 28px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  letter-spacing: 2px;
+}
+
+.list-venue {
+  background-color: rgba(0,245,245,1);;
+  color: white;
+  font-size: 28px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  letter-spacing: 2px;
+}
+
+.list-non-link {
+  /*font-family: 'Lato', sans-serif;*/
+  font-size: 20pt;
+}
 .top-spacer-form {
   padding-top: 150px;
 }
@@ -124,14 +160,14 @@ button {
 }
 
 .input-custom {
-  font-size: 50px;
+  font-size: 30px !important;
 }
 
 .venue-bg {
   background-color: rgba(0,245,245,1);
 }
 
-.venue-detail-form {
+.detail-form {
   background-color: rgba(0,0,0,.5);
   padding-left: 10px;
   padding-right: 10px;

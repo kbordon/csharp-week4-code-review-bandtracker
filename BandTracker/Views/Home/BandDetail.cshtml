@@ -4,28 +4,45 @@
 
 @using BandTracker.Models;
 @* @var bandId = @Model["band"].GetId(); doesn't work*@
-
-<h1>BAND: @Model["band"].GetName()</h1>
-<hr />
-@if (@Model["bandVenues"].Count != 0)
-{
-  <h4>Played at these venues:</h4>
-  <ul>
-    @foreach (Venue venue in @Model["bandVenues"])
-    {
-      <li>@venue.GetName()</li>
-    }
+<div>
+  <h1 class="top-top">BAND: @Model["band"].GetName()</h1>
+</div>
+<div class="container-custom link-custom">
+  <div class="row">
+    <div class="col s7 white-text">
+      @if (@Model["bandVenues"].Count != 0)
+      {
+        <h4 class="white-text list-band">PLAYED @@:</h4>
+        <ul>
+          @foreach (Venue venue in @Model["bandVenues"])
+          {
+            <li class="list-non-link">@venue.GetName()</li>
+          }
+        </ul>
+      }
+    </div>
+    <div class="col s5">
+      <div class="row">
+        <div class="col s12">
+          <div class="detail-form">
+            <h4 class="white-text">ADD A VENUE:</h4>
+            <form action='/bands/@Model["band"].GetId()/venues/new' method='post'>
+              <select class="white-text" id='venue-id' name='venue-id' type='text'>
+                <option value="" disabled selected>Select a band...</option>
+                @foreach (var venue in @Model["allVenues"])
+                {
+                  <option value='@venue.GetId()'>@venue.GetName()</option>
+                }
+              </select>
+              <button class="venue-bg right" type='submit'>ADD</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="link-other">
+    <li class="band-link"><a href="/bands">VIEW ALL BANDS</a></li>
+    <li><a href="/">HOME</a></li>
   </ul>
-}
-<h4>ADD A VENUE:</h4>
-<form action='/bands/@Model["band"].GetId()/venues/new' method='post'>
-  <select class="form-control" id='venue-id' name='venue-id' type='text'>
-    @foreach (var venue in @Model["allVenues"])
-    {
-      <option value='@venue.GetId()'>@venue.GetName()</option>
-    }
-  </select>
-  <button type='submit'>ADD</button>
-</form>
-<p><a href="/bands">VIEW ALL BANDS</a></p>
-<p><a href="/">HOME</a></p>
+</div>
