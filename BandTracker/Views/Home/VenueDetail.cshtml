@@ -4,33 +4,54 @@
 
 @using BandTracker.Models;
 @* @var venueId = Model["venue"].GetId() doesn't work*@
-<h1>VENUE: @Model["venue"].GetName()</h2>
-<hr />
-@if (@Model["venueBands"].Count != 0)
-{
-  <h4>Bands that have played here:</h4>
-  <ul>
-    @foreach (var band in @Model["venueBands"])
-    {
-      <li>@band.GetName()</li>
-    }
-  </ul>
-}
-<h4>ADD A BAND TO THIS VENUE:</h4>
-<form action='/venues/@Model["venue"].GetId()/bands/new' method='post'>
-  <select id='band-id' name='band-id' type='text'>
-    @foreach (var band in @Model["allBands"])
-    {
-      <option value='@band.GetId()'>@band.GetName()</option>
-    }
-  </select>
-  <label for='band-id'>Select a band</label>
-  <button type='submit'>ADD</button>
-</form>
-
-<form action'/venues/@Model["venue"].GetId()/delete' class="pull-right" method='post'>
-    <h4>(<a href='/venues/@Model["venue"].GetId()/edit'>EDIT</a>)</h4>
-    <button type="submit">REMOVE THIS VENUE</button>
-</form>
-<p><a href="/venues">VIEW ALL VENUES</a></p>
-<p><a href="/">HOME</a></p>
+<h1 class="top-index">VENUE: @Model["venue"].GetName()</h2>
+<div class="container-custom">
+  <div class="top-spacer link-custom">
+    <div class="row">
+      <div class="col s7">
+        @if (@Model["venueBands"].Count != 0)
+        {
+          <h4 class="white-text">Hosted:</h4>
+          <ul>
+            @foreach (var band in @Model["venueBands"])
+            {
+              <li>@band.GetName()</li>
+            }
+          </ul>
+        }
+      </div>
+      <div class="col s5">
+        <div class="row">
+          <div class="col s12">
+            <div class="venue-detail-form">
+              <h4 class="white-text">ADD A BAND TO THIS VENUE:</h4>
+              <form action='/venues/@Model["venue"].GetId()/bands/new' method='post'>
+                <select class="white-text" id='band-id' name='band-id' type='text'>
+                  <option value="">Select a band...</option>
+                  @foreach (var band in @Model["allBands"])
+                  {
+                    <option value='@band.GetId()'>@band.GetName()</option>
+                  }
+                </select>
+                <label for='band-id'>Select a band</label>
+                <button class="band-bg right" type='submit'>ADD</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <h4 class="white-text venue-link">(<a href='/venues/@Model["venue"].GetId()/edit'>EDIT</a>)</h4>
+            <form action'/venues/@Model["venue"].GetId()/delete' method='post'>
+              <button class="venue-bg" type="submit"><strong>REMOVE</strong> THIS VENUE</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul>
+      <li class="venue-link"><a href="/venues">VIEW ALL VENUES</a></li>
+      <li><a href="/">HOME</a></li>
+    </ul>
+  </div>
+</div>

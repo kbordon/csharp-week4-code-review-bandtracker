@@ -1,25 +1,28 @@
 @{
     Layout = "_Layout";
 }
-<h1>VENUES</h1>
-<hr />
-@if (Model.Count != 0)
-{
-  <ul class="list-unstyled">
-    @foreach (var venue in Model)
+<h1 class="top-index">VENUES</h1>
+  <div class="container-custom">
+    <div class="top-spacer link-custom">
+    @if (Model.Count != 0)
     {
-      <li><a href='/venues/@venue.GetId()'>@venue.GetName()</a></li>
+      <ul class="list-unstyled">
+        @foreach (var venue in Model)
+        {
+          <li class="link-list-size link-list-venue"><a href='/venues/@venue.GetId()'>@venue.GetName()</a></li>
+        }
+      </ul>
     }
-  </ul>
-}
-else
-{
-    <div class="alert alert-warning">
-      <h4><em>There are no venues entered yet.</em></h4>
-    </div>
-}
+    else
+    {
+        <div class="alert alert-warning">
+          <h4><em>There are no venues entered yet.</em></h4>
+        </div>
+    }
 
-<ul class="list-inline">
-  <li><a class="other-link" href="/venues/new">ADD A VENUE</a></li>
-  <li><a class="other-link" href="/">HOME</a></li>
-</ul>
+    <ul>
+      <li class="venue-link"><a href="/venues/new">ADD A VENUE</a></li>
+      <li><a href="/">HOME</a></li>
+    </ul>
+  </div>
+</div>

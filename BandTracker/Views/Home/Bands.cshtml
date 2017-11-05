@@ -6,12 +6,12 @@
   <div class="top-spacer link-custom">
     @if (Model["allBands"].Count != 0)
     {
-        <span class="link-other"><a href='/bands/@Model["random"].GetId()'>Discover a new band</a></span>
+        <span class="link-other link-list-band"><a href='/bands/@Model["random"].GetId()'>Discover a new band</a></span>
         <p class="white-text">Or select a band from the list below:</p>
       <ul class="list-unstyled">
         @foreach (var band in Model["allBands"])
         {
-          <li><a href='/bands/@band.GetId()'>@band.GetName()</a></li>
+          <li class="link-list-size link-list-band"><a href='/bands/@band.GetId()'>@band.GetName()</a></li>
         }
       </ul>
 
@@ -23,9 +23,9 @@
         </div>
     }
 
-    <ul class="list-inline link-other">
-      <li><a href="/bands/new">ADD A BAND</a></li>
-      <li><a href="/">HOME</a></li>
-    </ul>
+    <div class="link-custom link-other">
+      <p class="band-link"><a href="/bands">VIEW ALL BANDS</a>
+      <p><a href="/">HOME</a>
+    </div>
   </div>
 </div>

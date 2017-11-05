@@ -2,6 +2,7 @@
 body {
   font-family: 'Source Sans Pro', sans-serif;
   background-color: black;
+  font-size: 20px;
 }
 
 h1 {
@@ -69,25 +70,32 @@ html, body {
   font-weight: normal;
   color: yellow;
 }
-.link-index a {
+.link-index-size a {
   font-size: 40px;
 }
-
 .link-other a {
  font-size: 24px;
 }
 
-.link-list a {
+.link-list-size a {
   font-size: 30px;
+
+}
+.link-list-band a {
+  background-color: red;
+}
+.link-list-venue a {
+  background-color: rgba(0,245,245,1);
+  font
 }
 
-.link-band{
+.link-band-index{
   position: absolute;
   top: 175px;
   left: 4px;
 }
 
-.link-venue {
+.link-venue-index {
   position: absolute;
   bottom: 175px;
   right: 4px;
@@ -103,4 +111,45 @@ html, body {
 
 .container-custom {
   padding: 10px;
+}
+
+/*.btn-custom {*/
+button {
+  border: 0px;
+  /*width: 100px;*/
+  padding-left: 25px;
+  letter-spacing: 5px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.input-custom {
+  font-size: 50px;
+}
+
+.venue-bg {
+  background-color: rgba(0,245,245,1);
+}
+
+.venue-detail-form {
+  background-color: rgba(0,0,0,.5);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+/*.venue-link a {
+    background-color: aqua;
+}*/
+.venue-link a:hover {
+    background-color: rgba(0,245,245,1);
+}
+
+.band-bg {
+  background-color: red;
+}
+/*.band-link a {
+    background-color: red;
+}*/
+.band-link a:hover {
+    background-color: red;
 }
